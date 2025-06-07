@@ -21,7 +21,7 @@ const Home = () => {
                 <div className="main-header">
                     <Header birdName={""}></Header>
                 </div>
-                <div>
+                <div className="main-search-bar">
                     <SearchBar searchBird={searchBird} setSearchBird={setSearchBird}></SearchBar>
                 </div>
                 {/* <BirdsList searchBird={searchBird}></BirdsList> */}

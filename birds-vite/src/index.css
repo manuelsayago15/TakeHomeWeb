@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 *,
 *::before,
 *::after {
@@ -61,23 +62,53 @@ body {
   background-color: #ffffff;
 }
 
+.main-search-bar {
+  position: relative;
+  padding: 1rem;
+  border-bottom: #d5dadf 1px solid;
+  margin: 0px -1rem;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 1.75rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.main-search-bar input {
+  padding: 0.5rem 0.75rem;
+  padding-left: 2rem;
+  border-radius: 0.5rem;
+  border: none;
+  width: 100%;
+  background-color: #f1f4f8;
+}
+
+.main-search-bar input::placeholder {
+  color: #4f7a96;
+  opacity: 1;
+}
+
+/* Breakpoints */
 
 /* Mobile */
-@media (min-width: 320px) and (max-width: 480px) {
+@media screen and (min-width: 320px) and (max-width: 480px) {
   .home-container {
     width: 70%;
   }
 }
 
 /* Tablets */
-@media (min-width: 481px) and (max-width: 768px) {
+@media screen and (min-width: 481px) and (max-width: 768px) {
   .home-container {
     width: 70%;
   }
 }
 
 /* Laptops */
-@media (min-width: 769px) and (max-width: 1024px) {
+@media screen and (min-width: 769px) {
    .home-container {
     flex-direction: row;
     width: 80%;
@@ -118,29 +149,12 @@ body {
   .main-header {
     margin: 0 -1rem;
     padding: 0 1rem;
-    border-bottom: #d5dadf 2px solid;
+    border-bottom: #d5dadf 1px solid;
     height: 45px;
   }
 }
 
-/* Desktop */
-@media (min-width: 1025px) and (max-width: 1200px) {
-  /* .container {
-    padding: 2.5rem;
-    font-size: 17px;
-  } */
-}
-
-/* Extra Large */
-@media (min-width: 1201px) {
-  /* .container {
-    padding: 3rem;
-    font-size: 18px;
-  } */
-}
-
-
-
+/* Modal Styles */
 
 .modal-backdrop {
   position: fixed;

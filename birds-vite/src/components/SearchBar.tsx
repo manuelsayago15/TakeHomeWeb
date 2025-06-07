@@ -1,4 +1,5 @@
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 const SearchBar = ({
     searchBird,
     setSearchBird,
@@ -8,7 +9,8 @@ const SearchBar = ({
 }) => {
     
     return (
-        <>
+        <>  
+            <FontAwesomeIcon className="search-icon" icon={faMagnifyingGlass} size="sm" style={{ color: "#4f7a96" }} />
             <input
                 type="text"
                 id="search"
