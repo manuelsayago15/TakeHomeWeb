@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
-import GET_BIRDS from "../graphql/queries";
+import { GET_BIRDS } from "../graphql/queries";
+import { Link } from "react-router-dom";
 
 const BirdsList = ({ searchBird } : { searchBird: string }) => {
     /*type Bird = {
@@ -26,12 +27,14 @@ const BirdsList = ({ searchBird } : { searchBird: string }) => {
                 thumb_url: string;
                 image_url: string;
             }) => (
-                console.log("id:", bird.latin_name + ' ' + bird.english_name),
-				<li key={bird.id}>
-                    <img src={bird.thumb_url} alt={bird.english_name} />
-                    <h3>{bird.english_name}</h3>
-                    <p>{bird.latin_name}</p>
 
+                //console.log("id:", bird.latin_name + ' ' + bird.english_name),
+                <li key={bird.id}>
+                    <Link to={`/bird/${bird.id}`}>
+                        <img src={bird.thumb_url} alt={bird.english_name} />
+                        <h3>{bird.english_name}</h3>
+                        <p>{bird.latin_name}</p>
+                    </Link>
                 </li>
 			))}
 		</ul>

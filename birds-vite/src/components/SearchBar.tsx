@@ -11,7 +11,7 @@ const SearchBar = ({
         <>
             <input
                 type="text"
-                placeholder="Searc for birds"
+                placeholder="Search for birds"
                 value={searchBird}
                 onChange={(e) => setSearchBird(e.target.value)}
             />
