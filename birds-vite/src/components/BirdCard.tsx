@@ -1,13 +1,16 @@
 import { useParams } from "react-router-dom"
 import { useQuery } from "@apollo/client"
+import { useState } from "react";
 import { GET_BIRD_BY_ID } from "../graphql/queries"
 import Header from "./Header";
+import BirdModal from "./BirdModal";
 
 
 const BirdCard = () => {
     const { id } = useParams();
 
     //const { id } = useParams<{ id: string }>();
+    const [showModal, setShowModal] = useState(false)
 
     const { data, loading, error } = useQuery(GET_BIRD_BY_ID, {
         variables: { id },
@@ -20,7 +23,8 @@ const BirdCard = () => {
 
     return (
         <div>
-            <Header birdName={`/ ${bird.english_name}`} birdId={bird.id}></Header>
+            <Header birdName={`/ ${bird.english_name}`}></Header>
+            <button onClick={() => setShowModal(true)}>Add Note</button>
             <h1>{bird.english_name}</h1>
             <img src={bird.image_url} alt={bird.english_name} />
             <h2><i>{bird.latin_name}</i></h2>
@@ -34,7 +38,7 @@ const BirdCard = () => {
                 </li>
                 ))}
             </ul>
-            
+            <BirdModal showModal={showModal} setShowModal={setShowModal} birdId={bird.id}></BirdModal>
         </div>
     )
 }

@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :root {
 	color-scheme: light dark;
 	color: rgba(255, 255, 255, 0.87);
@@ -11,36 +17,126 @@ body {
 	background: linear-gradient(#f9f9f9, #dce3f3);
 }
 
-/* .container {
-	display: flex;
-	flex-direction: column;
-	margin: 0 auto;
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-	border-radius: 1.5rem;
-} */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  border: #c6c7c9 1px solid;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar {
+  text-align: center;
+  background-color: #fbfcff;
+}
+
+.sidebar-link {
+  margin-top: 1rem;
+  background-color: #edf1f8;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.sidebar p {
+  color: #4f7a96;
+}
+
+.sidebar-link a {
+  text-decoration: none;
+  color: #0d171c;
+  font-weight: bold;
+}
+
+.main {
+  text-align: center;
+  background-color: #ffffff;
+}
+
+
+/* Mobile */
+@media (min-width: 320px) and (max-width: 480px) {
+  .home-container {
+    width: 70%;
+  }
+}
 
 /* Tablets */
-@media (min-width: 641px) and (max-width: 768px) {
-  .container {
-    padding: 2rem;
-    font-size: 16px;
+@media (min-width: 481px) and (max-width: 768px) {
+  .home-container {
+    width: 70%;
   }
 }
 
 /* Laptops */
 @media (min-width: 769px) and (max-width: 1024px) {
-  .container {
-    padding: 2.5rem;
-    font-size: 17px;
+   .home-container {
+    flex-direction: row;
+    width: 80%;
+    height: 500px;
+    /* gap: 1rem; */
+  }
+
+  .sidebar {
+    width: 30%;
+    height: 100%;
+    text-align: left;
+    padding: 1rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-right: #d5dadf 1px solid;
+  }
+
+  .sidebar h1,
+  .sidebar p {
+    margin: 0.1rem 0;
+    /* line-height: 0.1rem; */
+    font-size: 1rem;
+  }
+  
+  .main {
+    width: 70%;
+    height: 100%;
+    text-align: left;
+    padding: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+
+  .main h1 {
+    margin: 0 0 1rem;
+  }
+
+  .main-header {
+    margin: 0 -1rem;
+    padding: 0 1rem;
+    border-bottom: #d5dadf 2px solid;
+    height: 45px;
   }
 }
 
 /* Desktop */
-@media (min-width: 1025px) {
-  .container {
+@media (min-width: 1025px) and (max-width: 1200px) {
+  /* .container {
+    padding: 2.5rem;
+    font-size: 17px;
+  } */
+}
+
+/* Extra Large */
+@media (min-width: 1201px) {
+  /* .container {
     padding: 3rem;
     font-size: 18px;
-  }
+  } */
 }
 
 
