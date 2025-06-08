@@ -40,9 +40,14 @@ const BirdCard = () => {
                         <ul>
                             {bird.notes.map((note: { id: string; comment: string; timestamp: number }) => (
                                 <li key={note.id}>
-                                <p>{note.comment}</p>
-                                <small>{new Date(note.timestamp).toLocaleString()}</small>
-                            </li>
+                                    <div>
+                                        <img src={bird.thumb_url} alt={bird.english_name}/>
+                                        <div>
+                                            <h3>{new Date(note.timestamp).toLocaleString()}</h3>
+                                            <p>{note.comment}</p>
+                                        </div>
+                                    </div>
+                                </li>
                             ))}
                         </ul>
                     </div>

@@ -43,6 +43,7 @@ const BirdModal = ({
                     <h2>Add a Note</h2>
                     <input 
                         type="text"
+                        id="note"
                         placeholder="Where did you spot it?"
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}

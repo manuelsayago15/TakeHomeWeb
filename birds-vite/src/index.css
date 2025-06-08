@@ -186,6 +186,18 @@ body {
 
   .bird-card-notes ul {
     list-style: none;
+    margin: 0;
+    padding: 1rem 0;
+  }
+
+  .bird-card-notes h3 {
+    color: #0d171c;
+    margin-bottom: 0;
+  }
+  
+  .bird-card-notes p {
+    color: #4f7a96;
+    margin-top: 0;
   }
 
 /* Breakpoints */
@@ -271,6 +283,23 @@ body {
 
   .bird-card-languages > div {
     flex: 1;
+  }
+
+  .bird-card-notes > ul li div {
+    display: flex;
+  }
+  
+  .bird-card-notes > ul li div > div {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .bird-card-notes > ul li div img {
+    width: 7%;
+    height: auto;
+    max-height: 130px;
+    margin: 0.5rem 1rem 0.5rem 0;
+    border-radius: 0.8rem;
   }
 
 }

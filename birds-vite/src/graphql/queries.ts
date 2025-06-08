@@ -19,6 +19,7 @@ export const GET_BIRD_BY_ID = gql`
             english_name
             latin_name
             image_url
+            thumb_url
             notes {
                 id
                 comment
