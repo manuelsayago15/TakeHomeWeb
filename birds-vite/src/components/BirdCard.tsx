@@ -4,12 +4,12 @@ import { useState } from "react";
 import { GET_BIRD_BY_ID } from "../graphql/queries"
 import BirdModal from "./BirdModal";
 import SideBar from "./SiderBar";
+import ZoomImage from "./ZoomImage";
 
 
 const BirdCard = () => {
     const { id } = useParams();
 
-    //const { id } = useParams<{ id: string }>();
     const [showModal, setShowModal] = useState(false)
 
     const { data, loading, error } = useQuery(GET_BIRD_BY_ID, {
@@ -21,56 +21,58 @@ const BirdCard = () => {
 
     const bird = data.bird;
 
+    if (!bird) return <p>No se encontró el ave.</p>;
+
     return (
         <>
-            <div className="layout-left">
-                <SideBar></SideBar>
-                <section className="layout-right">
-                    <div className="bird-card-header">
-                        <h1>
-                            <span>Birds /</span> {`${bird.english_name}`}
-                        </h1>
-                        <button className="add-note-button" onClick={() => setShowModal(true)}>Add Note</button>
-                    </div>
-                    <div className="bird-card-image">
-                        <img src={bird.image_url} alt={bird.english_name} />
-                    </div>
-                    <div className="bird-card-notes">
-                        <h2>Notes</h2>
-                        <ul>
-                            {bird.notes.map((note: { id: string; comment: string; timestamp: number }) => (
-                                <li key={note.id}>
-                                    <div>
-                                        <img src={bird.thumb_url} alt={bird.english_name}/>
+            {bird && (
+                <div className="layout-container">
+                    <SideBar></SideBar>
+                    <section className="layout-right">
+                        <div className="bird-card-header">
+                            <h1>
+                                <span>Birds /</span> {`${bird.english_name}`}
+                            </h1>
+                            <button className="add-note-button" onClick={() => setShowModal(true)}>Add Note</button>
+                        </div>
+                        <div className="bird-card-image">
+                            <ZoomImage birdImage={bird.image_url} alt={bird.english_name}></ZoomImage>
+                        </div>
+                        <div className="bird-card-notes">
+                            <h2>Notes</h2>
+                            <ul>
+                                {bird.notes.map((note: { id: string; comment: string; timestamp: number }) => (
+                                    <li key={note.id}>
                                         <div>
-                                            <h3>{new Date(note.timestamp).toLocaleString()}</h3>
-                                            <p>{note.comment}</p>
+                                            <img src={bird.thumb_url} alt={bird.english_name}/>
+                                            <div>
+                                                <h3>{new Date(note.timestamp * 1000).toLocaleString()}</h3>
+                                                <p>{note.comment}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div className="bird-card-languages-container">
-                        <div className="bird-card-languages-title">
-                            <h2>In Other Languages</h2>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
-                        <div className="bird-card-languages">
-                            <div>
-                                <h3>English</h3>
-                                <p>{bird.english_name}</p>
+                        <div className="bird-card-languages-container">
+                            <div className="bird-card-languages-title">
+                                <h2>In Other Languages</h2>
                             </div>
-                            <div>
-                                <h3>Latin</h3>
-                                <p>{bird.latin_name}</p>
+                            <div className="bird-card-languages">
+                                <div>
+                                    <h3>English</h3>
+                                    <p>{bird.english_name}</p>
+                                </div>
+                                <div>
+                                    <h3>Latin</h3>
+                                    <p>{bird.latin_name}</p>
+                                </div>
                             </div>
                         </div>
-
-                    </div>
-                </section>
-
-                <BirdModal showModal={showModal} setShowModal={setShowModal} birdId={bird.id}></BirdModal>
-            </div>
+                    </section>
+                    { showModal && <BirdModal showModal={showModal} setShowModal={setShowModal} birdId={bird.id}></BirdModal>}
+                </div>
+            )}
         </>
     )
 }

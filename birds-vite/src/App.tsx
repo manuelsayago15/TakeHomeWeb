@@ -16,20 +16,19 @@ const App = () => {
 				birds {
 					id
 					english_name
+					notes{
+						id
+						comment
+						timestamp
+					}
 					}
 					}
 					`,
 				})
 				.then((result) => console.log(result.data));
 			}, []);
-			
-	
-	//console.log('Token desde Vite:', import.meta.env.VITE_ACCESS_TOKEN);
 
 	return (
-		// <>
-		// 	<Main></Main>
-		// </>
 		<div className='container'>
 			<Router>
 				<Routes>

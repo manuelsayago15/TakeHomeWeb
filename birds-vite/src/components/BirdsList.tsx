@@ -4,14 +4,9 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const BirdsList = ({ searchBird } : { searchBird: string }) => {
-    /*type Bird = {
-        id: string;
-        english_name: string;
-    }*/
 
     const { loading, error, data } = useQuery(GET_BIRDS);
     const [visibleCount, setVisibleCount] = useState(12);
-
 
     useEffect(() => {
         let isScrolled = false;
@@ -37,11 +32,15 @@ const BirdsList = ({ searchBird } : { searchBird: string }) => {
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error: {error.message}</p>;
 
-    const filteredBirds = data.birds.filter((bird: { english_name: string }) => 
+    const filteredBirds = data.birds?.filter((bird: { english_name: string }) => 
         bird.english_name.toLowerCase().includes(searchBird.toLowerCase())
     );
 
     const loadedBirds = filteredBirds.slice(0, visibleCount)
+
+    if (filteredBirds.length === 0) {
+        return <p>No se encontró "{searchBird}"</p>;
+    }
 
     return (
         <ul className="birds-list">
@@ -53,7 +52,6 @@ const BirdsList = ({ searchBird } : { searchBird: string }) => {
                 image_url: string;
             }) => (
 
-                //console.log("id:", bird.latin_name + ' ' + bird.english_name),
                 <li key={bird.id}>
                     <Link to={`/bird/${bird.id}`}>
                         <img src={bird.thumb_url} alt={bird.english_name} />

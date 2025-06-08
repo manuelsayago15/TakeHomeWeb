@@ -7,7 +7,7 @@ const Home = () => {
     const [searchBird, setSearchBird] = useState('')
 
     return (
-        <div className="layout-left">
+        <div className="layout-container">
             <SideBar></SideBar>
             <main className="layout-right">
                 <div className="main-header">
