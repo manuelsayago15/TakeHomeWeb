@@ -16,12 +16,12 @@ const BirdCard = () => {
         variables: { id },
     });
 
-    if (loading) return <p>Cargando...</p>;
+    if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
 
     const bird = data.bird;
 
-    if (!bird) return <p>No se encontró el ave.</p>;
+    if (!bird) return <p>Couldn't find the bird.</p>;
 
     return (
         <>

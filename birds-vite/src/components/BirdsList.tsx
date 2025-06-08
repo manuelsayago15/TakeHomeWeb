@@ -39,7 +39,7 @@ const BirdsList = ({ searchBird } : { searchBird: string }) => {
     const loadedBirds = filteredBirds.slice(0, visibleCount)
 
     if (filteredBirds.length === 0) {
-        return <p>No se encontró "{searchBird}"</p>;
+        return <p>Couldn't find "{searchBird}"</p>;
     }
 
     return (
