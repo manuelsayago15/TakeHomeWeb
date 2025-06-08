@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { GET_BIRDS } from "../graphql/queries";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const BirdsList = ({ searchBird } : { searchBird: string }) => {
     /*type Bird = {
@@ -8,19 +9,43 @@ const BirdsList = ({ searchBird } : { searchBird: string }) => {
         english_name: string;
     }*/
 
-
     const { loading, error, data } = useQuery(GET_BIRDS);
+    const [visibleCount, setVisibleCount] = useState(12);
+
+
+    useEffect(() => {
+        let isScrolled = false;
+
+        const handleScroll = () => {
+            if (
+                !isScrolled && window.innerHeight + window.scrollY >= document.body.offsetHeight - 200
+            ) {
+                setVisibleCount((prev) => prev + 12)
+                isScrolled = true
+
+                setTimeout(() => {
+                    isScrolled = false
+                }, 2000)
+            }
+        }
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll)
+    }, []);
+
 	
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error: {error.message}</p>;
 
     const filteredBirds = data.birds.filter((bird: { english_name: string }) => 
         bird.english_name.toLowerCase().includes(searchBird.toLowerCase())
-    )
+    );
+
+    const loadedBirds = filteredBirds.slice(0, visibleCount)
 
     return (
-        <ul>
-			{filteredBirds.map((bird: { 
+        <ul className="birds-list">
+			{loadedBirds.map((bird: { 
                 id: string; 
                 english_name: string; 
                 latin_name: string;

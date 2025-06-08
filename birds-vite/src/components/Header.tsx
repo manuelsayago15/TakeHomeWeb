@@ -1,5 +1,5 @@
 const Header = ({ 
-    birdName,
+    birdName, 
 } : { 
     birdName: string,
 }) => {

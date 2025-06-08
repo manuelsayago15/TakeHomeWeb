@@ -2,8 +2,8 @@ import { useParams } from "react-router-dom"
 import { useQuery } from "@apollo/client"
 import { useState } from "react";
 import { GET_BIRD_BY_ID } from "../graphql/queries"
-import Header from "./Header";
 import BirdModal from "./BirdModal";
+import SideBar from "./SiderBar";
 
 
 const BirdCard = () => {
@@ -22,24 +22,51 @@ const BirdCard = () => {
     const bird = data.bird;
 
     return (
-        <div>
-            <Header birdName={`/ ${bird.english_name}`}></Header>
-            <button onClick={() => setShowModal(true)}>Add Note</button>
-            <h1>{bird.english_name}</h1>
-            <img src={bird.image_url} alt={bird.english_name} />
-            <h2><i>{bird.latin_name}</i></h2>
+        <>
+            <div className="layout-left">
+                <SideBar></SideBar>
+                <section className="layout-right">
+                    <div className="bird-card-header">
+                        <h1>
+                            <span>Birds /</span> {`${bird.english_name}`}
+                        </h1>
+                        <button className="add-note-button" onClick={() => setShowModal(true)}>Add Note</button>
+                    </div>
+                    <div className="bird-card-image">
+                        <img src={bird.image_url} alt={bird.english_name} />
+                    </div>
+                    <div className="bird-card-notes">
+                        <h2>Notes</h2>
+                        <ul>
+                            {bird.notes.map((note: { id: string; comment: string; timestamp: number }) => (
+                                <li key={note.id}>
+                                <p>{note.comment}</p>
+                                <small>{new Date(note.timestamp).toLocaleString()}</small>
+                            </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className="bird-card-languages-container">
+                        <div className="bird-card-languages-title">
+                            <h2>In Other Languages</h2>
+                        </div>
+                        <div className="bird-card-languages">
+                            <div>
+                                <h3>English</h3>
+                                <p>{bird.english_name}</p>
+                            </div>
+                            <div>
+                                <h3>Latin</h3>
+                                <p>{bird.latin_name}</p>
+                            </div>
+                        </div>
 
-            <h3>Notes</h3>
-            <ul>
-                {bird.notes.map((note: { id: string; comment: string; timestamp: number }) => (
-                <li key={note.id}>
-                    <p>{note.comment}</p>
-                    <small>{new Date(note.timestamp).toLocaleString()}</small>
-                </li>
-                ))}
-            </ul>
-            <BirdModal showModal={showModal} setShowModal={setShowModal} birdId={bird.id}></BirdModal>
-        </div>
+                    </div>
+                </section>
+
+                <BirdModal showModal={showModal} setShowModal={setShowModal} birdId={bird.id}></BirdModal>
+            </div>
+        </>
     )
 }
 
